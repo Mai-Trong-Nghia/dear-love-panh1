@@ -1,57 +1,42 @@
-const messages = [
-  "Gửi đến emm Phanh ❤️",
-  "Cảm ơn em đã đến bên anh 💖",
-  "quan tâm và chăm sóc anh 💍",
-  "emm là món quà tuyệt vời nhất ❤️",
-  "Anh yêu emm❤️"
-  "❤️❤️❤️❤️❤️❤️❤️❤️"
+const texts = [
+  "Anh yêu em 💕","Cảm ơn em đã bên anh","Yêu Phanh mãi mãi 🌸",
+  "Mãi là của nhau 💖","Em là niềm hạnh phúc ☀️"
 ];
+const colors = ["neon-red","neon-green","neon-blue","neon-purple","neon-yellow"];
+const images = ["images/Love1.jpg","images/Love2.jpg","images/Love3.jpg"];
+const animals = ["images/cat.png"];
 
-const colors = [
-  "neon-red",
-  "neon-green",
-  "neon-blue",
-  "neon-purple",
-  "neon-yellow"
-];
-
-function createFallingText() {
-  const text = document.createElement("p");
-  text.textContent = messages[Math.floor(Math.random() * messages.length)];
-  text.classList.add("falling-text");
-  text.classList.add(colors[Math.floor(Math.random() * colors.length)]);
-  text.style.left = Math.random() * 100 + "vw";
-  document.getElementById("message").appendChild(text);
-
-  setTimeout(() => {
-    text.remove();
-  }, 6000);
+function random(x){return Math.random()*x;}
+function spawn(type){
+  if(type==="text"){
+    const el=document.createElement("p");
+    el.classList.add("falling-text",colors[Math.floor(random(colors.length))]);
+    el.innerText=texts[Math.floor(random(texts.length))];
+    el.style.left=`${random(90)}vw`;
+    el.style.animationDuration=`${4+random(4)}s`;
+    document.body.append(el);
+    setTimeout(()=>el.remove(),8000);
+  }
+  if(type==="image"){
+    const el=document.createElement("img");
+    el.src=images[Math.floor(random(images.length))];
+    el.classList.add("gallery-image");
+    el.style.left=`${random(90)}vw`;
+    el.style.animationDuration=`${4+random(4)}s`;
+    document.body.append(el);
+    setTimeout(()=>el.remove(),8000);
+  }
+  if(type==="animal"){
+    const el=document.createElement("img");
+    el.src=animals[0];
+    el.classList.add("animal");
+    el.style.top=`${random(80)}vh`;
+    el.style.left=`${random(90)}vw`;
+    document.getElementById("animal-container").append(el);
+    setTimeout(()=>el.remove(),12000);
+  }
 }
 
-function createFallingImage() {
-  const imageNames = ["Love1.jpg", "Love2.jpg", "Love3.jpg"];
-  const img = document.createElement("img");
-  img.src = `images/${imageNames[Math.floor(Math.random() * imageNames.length)]}`;
-  img.className = "gallery-image";
-  img.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(img);
-
-  setTimeout(() => {
-    img.remove();
-  }, 6000);
-}
-
-function spawnAnimal() {
-  const animal = document.createElement("img");
-  animal.src = "images/cat.png"; // You can replace this with any image
-  animal.classList.add("animal");
-  document.getElementById("animal-container").appendChild(animal);
-
-  setTimeout(() => {
-    animal.remove();
-  }, 20000);
-}
-
-setInterval(createFallingText, 500);
-setInterval(createFallingImage, 800);
-setInterval(spawnAnimal, 15000);
+setInterval(()=>spawn("text"), 700);
+setInterval(()=>spawn("image"), 1000);
+setInterval(()=>spawn("animal"), 5000);
