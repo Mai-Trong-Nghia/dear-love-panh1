@@ -3,8 +3,8 @@ const texts = [
   "Mãi là của nhau 💖","Em là niềm hạnh phúc ☀️"
 ];
 const colors = ["neon-red","neon-green","neon-blue","neon-purple","neon-yellow"];
-const images = ["images/Love1.jpg","images/Love2.jpg","images/Love3.jpg"];
-const animals = ["images/cat.png"];
+const imageSources = ["images/Love1.jpg","images/Love2.jpg","images/Love3.jpg"];
+const animalSources = ["images/cat.png"];
 
 function random(x){return Math.random()*x;}
 function spawn(type){
